@@ -5,7 +5,7 @@ module.exports = function() {
         
         
         /* Database Config */
-        db: ''
+        db: 'mongodb://admin:password@localhost:27017/addressbook'
     };
     
     return config;

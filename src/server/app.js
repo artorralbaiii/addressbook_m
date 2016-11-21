@@ -6,11 +6,22 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var compress = require('compression');
 var favicon = require('serve-favicon');
+var mongoose = require('mongoose');
 
+var config = require('./app.config')();
 var port = process.env.PORT || 3000;
 var environment = process.env.NODE_ENV;
 var errorHandler = require('./routes/utils/errorHandler')();
 var app = express();
+
+// Database Connection
+mongoose.connect(config.db, function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Connected to database...');
+    }
+});
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({
