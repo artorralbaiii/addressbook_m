@@ -37,7 +37,8 @@ console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
 // API Router
-var api = require('./routes/index.js')(app);
+var api = require('./routes/index.js')(express);
+app.use('/api', api);
 
 switch (environment) {
 case 'build':

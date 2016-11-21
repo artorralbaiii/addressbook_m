@@ -6,7 +6,7 @@
   "repository": "https://github.com/artorralbaiii/addressbook.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server/app.js"
+    "start": "gulp serve-dev"
   },
   "keywords": [
     "addressbook",
