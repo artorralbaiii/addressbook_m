@@ -1,6 +1,7 @@
 var client = './src/client/';
 var clientApp = client + 'app/';
 var server = './src/server/';
+var temp = './.tmp/';
 
 
 module.exports = function () {
@@ -13,8 +14,10 @@ module.exports = function () {
             './src/**/*.js',
             './*.js'
         ],
+        build: './build/',
         client: client,
         css: client + 'styles/**/*.css',
+        htmltemplates: clientApp + '**/*.html',
         index: client + 'index.html',
         js: [
             clientApp + '**/*.module.js',
@@ -22,6 +25,7 @@ module.exports = function () {
             '!' + clientApp + '**/*.spec.js'
         ],
         server: server,
+        temp: temp,
 
         /**
          * Bower and NPM locations
@@ -30,6 +34,26 @@ module.exports = function () {
             json: require('./bower.json'),
             directory: './bower_components/',
             ignorePath: '../..'
+        },
+
+        /**
+         * optimized files
+         */
+        optimized: {
+            app: 'app.js',
+            lib: 'lib.js'
+        },
+
+        /**
+         * template cache
+         */
+        templateCache: {
+            file: 'templates.js',
+            options: {
+                module: 'app.core',
+                standAlone: false,
+                root: 'app/'
+            }
         },
 
         /* Node settings */

@@ -8,15 +8,19 @@
     <title>Addressbook</title>
     <link rel="shortcut icon" href="/server/ccfavicon.ico" />
     
+    <!-- build:css styles/lib.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
     <!-- endbower -->
-    
+    <!-- endbuild -->
+
+    <!-- build:css styles/app.css-->
     <!-- inject:css -->
     <link rel="stylesheet" href="/src/client/styles/styles.css">
     <!-- endinject -->
+    <!-- endbuild -->
     
 </head>
 
@@ -25,6 +29,7 @@
     <main data-ng-view class="container">
     </main>
     
+    <!-- build:js js/lib.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -34,7 +39,9 @@
     <script src="/bower_components/bootbox.js/bootbox.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <!-- endbower -->
-    
+    <!-- endbuild -->
+
+    <!-- build:js js/app.js-->
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/core/core.module.js"></script>
@@ -43,6 +50,11 @@
     <script src="/src/client/app/users/users.controller.js"></script>
     <script src="/src/client/app/users/users.route.js"></script>
     <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+
+    <!-- endbuild -->
     
 </body>
 
