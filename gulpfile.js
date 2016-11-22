@@ -25,8 +25,21 @@ gulp.task('vet', function () {
 
 });
 
-gulp.task('serve-dev', ['vet'], function () {
+gulp.task('serve-dev', ['vet', 'wiredep'], function () {
     serve('dev');
+});
+
+gulp.task('wiredep', function () {
+    log('Wire up the bower css js and our app js into the html');
+    var options = config.getWiredepDefaultOptions();
+    var wiredep = require('wiredep').stream;
+
+    return gulp
+        .src(config.index)
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.js)))
+        .pipe($.inject(gulp.src(config.css)))
+        .pipe(gulp.dest(config.client));
 });
 
 //////////
@@ -67,5 +80,5 @@ function serve(env) {
         .on('exit', function () {
             log('*** nodemon exited cleanly');
         });
-    
+
 }

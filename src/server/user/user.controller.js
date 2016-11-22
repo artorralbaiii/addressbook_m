@@ -70,7 +70,7 @@ module.exports = function () {
 
         User.remove({
             _id: req.params.id
-        }, function (err) {
+        }, function (err, results) {
             if (err) {
                 next(err);
                 return;

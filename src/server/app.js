@@ -49,6 +49,7 @@ case 'build':
 default:
     console.log('** DEV **');
     app.use(express.static('./src/client/'));
+    app.use(express.static('./'));
     app.use('/*', express.static('./src/client/index.html'));
     break;
 }

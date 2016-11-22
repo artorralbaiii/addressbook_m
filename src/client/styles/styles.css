@@ -1,0 +1,20 @@
+main {
+    margin-top: 100px;
+}
+
+.search {
+    margin: 20px 0px;
+}
+
+.fa.fa-pencil-square-o, .fa.fa-trash {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.tbl-user tr.ng-enter {
+    animation: bounceInUp 1s;
+}
+
+.tbl-user tr.ng-leave {
+    animation: bounceOut 1s;
+}

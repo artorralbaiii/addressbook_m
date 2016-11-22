@@ -1,0 +1,87 @@
+<div class="row">
+
+    <!-- Addressbook Form -->
+
+    <div class="col-md-4">
+
+        <h1>Contact Form</h1>
+
+        <form data-ng-submit="vm.editMode ? vm.updateUser() : vm.createUser()" name="contact-form">
+
+            <div class="form-group">
+                <label for="firstName">First Name: </label>
+                <input name="firstName" type="text" data-ng-model="vm.user.firstName" class="form-control input-sm">
+            </div>
+
+            <div class="form-group">
+                <label for="middleName">Middle Name: </label>
+                <input name="middleName" type="text" data-ng-model="vm.user.middleName" class="form-control input-sm">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name: </label>
+                <input name="lastName" type="text" data-ng-model="vm.user.lastName" class="form-control input-sm">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input name="email" type="email" data-ng-model="vm.user.email" class="form-control input-sm">
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile: </label>
+                <input name="mobile" type="text" data-ng-model="vm.user.mobile" class="form-control input-sm">
+            </div>
+
+            <div class="form-group">
+                <button data-ng-disabled="vm.sending" class="btn btn-primary" type="submit">{{vm.editMode ? 'Update' : 'Submit'}}</button>
+                <button data-ng-disabled="vm.sending" data-ng-if="vm.editMode" data-ng-click="vm.cancelEdit()" class="btn btn-warning" >Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Addressbook Table   -->
+
+    <div class="col-md-8">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="pull-right search">
+                    <label for="search">Search: </label>
+                    <input data-ng-model="vm.search" name="search" class="input-sm" type="text" placeholder="search...">
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped tbl-user">
+
+                        <thead>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th colspan="2"></th>
+                        </thead>
+
+                        <tbody>
+                            <tr data-ng-repeat="u in vm.users | filter:vm.search ">
+                                <td>{{u.firstName}} {{u.lastName}}</td>
+                                <td>{{u.email}}</td>
+                                <td>{{u.mobile}}</td>
+                                <td><a data-ng-click="vm.getRowData(u)" title="Edit User">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a data-ng-click="vm.deleteRowData(u)" title="Delete User">
+                                    <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
