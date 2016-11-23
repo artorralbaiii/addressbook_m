@@ -1,9 +1,11 @@
 var args = require('yargs').argv;
 var del = require('del');
 var gulp = require('gulp');
+var path = require('path');
 var $ = require('gulp-load-plugins')({
     lazy: true
 });
+var _ = require('lodash');
 
 var config = require('./gulp.config.js')();
 var port = process.env.PORT || config.defaultPort;
@@ -57,7 +59,7 @@ gulp.task('inject', ['wiredep', 'vet', 'templatecache'], function(){
     
 });
 
-gulp.task('templatecache', ['clean'], function () {
+gulp.task('templatecache', ['clean-temp'], function () {
     log('Creating AngularJS $templateCache');
 
     return gulp
@@ -72,11 +74,33 @@ gulp.task('templatecache', ['clean'], function () {
         .pipe(gulp.dest(config.temp));
 });
 
-gulp.task('clean', function (done) {
+gulp.task('clean-temp', function (done) {
     clean(config.temp, done);
 });
 
-gulp.task('optimize', function () {
+gulp.task('clean-build', function (done) {
+    clean(config.build, done);
+});
+
+gulp.task('clean-fonts', function(done) {
+    clean(config.build + 'fonts/**/*.*', done);
+});
+
+gulp.task('fonts', ['clean-fonts'], function() {
+    log('Copying fonts');
+
+    return gulp
+        .src(config.fonts)
+        .pipe(gulp.dest(config.build + 'fonts'));
+});
+
+gulp.task('clean', function(done) {
+    var delconfig = [].concat(config.build, config.temp);
+    log('Cleaning: ' + $.util.colors.blue(delconfig));
+    del(delconfig, done);
+});
+
+gulp.task('optimize', ['inject'], function () {
 
     var assets = $.useref.assets({
         searchPath: './'
@@ -115,6 +139,19 @@ gulp.task('optimize', function () {
 
 });
 
+gulp.task('build', ['optimize', 'fonts'], function() {
+    log('Building everything');
+
+    var msg = {
+        title: 'gulp build',
+        subtitle: 'Deployed to the build folder',
+        message: 'Running `gulp serve-build`'
+    };
+    del(config.temp);
+    log(msg);
+    notify(msg);
+});
+
 //////////
 
 function clean(path, done) {
@@ -133,6 +170,17 @@ function log(msg) {
     } else {
         $.util.log($.util.colors.blue(msg));
     }
+}
+
+function notify(options) {
+    var notifier = require('node-notifier');
+    var notifyOptions = {
+        sound: 'Bottle',
+        contentImage: path.join(__dirname, 'gulp.png'),
+        icon: path.join(__dirname, 'gulp.png')
+    };
+    _.assign(notifyOptions, options);
+    notifier.notify(notifyOptions);
 }
 
 function serve(env) {
