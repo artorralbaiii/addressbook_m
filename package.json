@@ -6,7 +6,7 @@
   "repository": "https://github.com/artorralbaiii/addressbook.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve-dev"
+    "start": "node src/server/app.js"
   },
   "keywords": [
     "addressbook",
@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cfenv": "^1.0.3",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "mongoose": "^4.6.8",
