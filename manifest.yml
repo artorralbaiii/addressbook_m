@@ -3,10 +3,8 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: sample-addressbook-art
-  host: sample-addressbook-art
+  name: addressbook123
+  host: addressbook123
   disk_quota: 1024M
-  env:
-    NODE_ENV: build
   services:
-    - Compose for MongoDB-2v
+  - Compose for MongoDB-3r

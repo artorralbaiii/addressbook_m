@@ -15,7 +15,7 @@ var environment = process.env.NODE_ENV;
 var errorHandler = require('./routes/utils/errorHandler')();
 var app = express();
 var appenv = cfenv.getAppEnv();
-var services = appenv.services;
+var services = appenv.isLocal ? config.services : appenv.services;
 var mongodb_services = services["compose-for-mongodb"];
 var credentials = mongodb_services[0].credentials;
 
